@@ -11,3 +11,24 @@
 
 ## アプリケーションの起動
 - src/app/GarbageScheduler.javaのmainメソッドを実行する
+
+
+# クラス
+## domainパッケージ
+| クラス | 説明 |
+| --- | --- |
+| CollectingDays | 収集日のインターフェース<br>与えられた日付が収集日か判断するメソッドと指定された月の収集日のリストを返すメソッドをもつ |
+| CollectionDay | CollectingDaysの実装<br>収集日の情報を曜日と第何週かの形式で保持する |
+| CollectionDate | CollectingDaysの実装<br>収集日の情報を日付で保持する |
+| Garbage | ゴミの種類名と収集日(CollectingDays)のリストを保持する<br>与えられた日付が収集日か判断するメソッドと指定された月の収集日リストを返すメソッドをもつ |
+| DomainTest | CollectionDayのテスト |
+
+## serviceパッケージ
+| クラス | 説明 |
+| --- | --- |
+| GarbageCollectionScheduleService | ゴミ(Garbage)のリストを保持し、指定された月のゴミ収集日スケジュールを返すメソッドをもつ |
+
+## appパッケージ
+| クラス | 説明 |
+| --- | --- |
+| GarbageScheduler | メインメソッドをもつクラス<br>今月のゴミ収集日スケジュールを表示する |
