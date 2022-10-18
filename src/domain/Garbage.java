@@ -16,21 +16,21 @@ public class Garbage {
 	
 	private Integer id;
 	private String name;
-	private List<CollectionDay> collectionDays; // 収集日
+	private List<CollectingDays> collectionDays; // 収集日
 	
-	public Garbage(Integer id, String name, CollectionDay... collectionDays) {
+	public Garbage(Integer id, String name, CollectingDays... collectingDays) {
 		this.id = id;
 		this.name = name;
-		setCollectionDays(collectionDays);
+		setCollectingDays(collectingDays);
 	}
 	
-	public void setCollectionDays(CollectionDay... collectionDays) {
-		this.collectionDays = Arrays.stream(collectionDays).collect(Collectors.toList());
+	public void setCollectingDays(CollectingDays... collectingDays) {
+		this.collectionDays = Arrays.stream(collectingDays).collect(Collectors.toList());
 	}
 	
 	// 与えられた日付(年月日)が収集日か?
 	public boolean isCollectionDay(LocalDate date) {
-		for(CollectionDay day : collectionDays) {
+		for(CollectingDays day : collectionDays) {
 			if(day.isCollectingDay(date)) return true;
 		}
 		return false;
@@ -39,7 +39,7 @@ public class Garbage {
 	// 与えられた月(年と月)の回収日リスト
 	public List<LocalDate> getCollectionDaysOfMonth(YearMonth yearMonth) {
 		List<LocalDate> collectionDaysOfMonth = new ArrayList<>();
-		for(CollectionDay day : collectionDays) {
+		for(CollectingDays day : collectionDays) {
 			collectionDaysOfMonth.addAll(day.getCollectingDaysOfMonth(yearMonth));
 		}
 		return collectionDaysOfMonth;

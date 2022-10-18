@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import lombok.Data;
 
 @Data
-public class CollectionDay {
+public class CollectionDay implements CollectingDays {
 	
 	private DayOfWeek dayOfWeek; // 曜日
 	private List<Integer> collectingWeek; // 第何週
@@ -30,7 +30,7 @@ public class CollectionDay {
 		this.collectingWeek = Arrays.stream(weekNum).collect(Collectors.toList());
 	}
 	
-	// 与えられた日付(年月日)が収集日か?
+	@Override
 	public boolean isCollectingDay(LocalDate date) {
 		for(int weekNum : collectingWeek) {
 			var adustedDate = date.with(TemporalAdjusters.dayOfWeekInMonth(weekNum, dayOfWeek));
@@ -39,17 +39,12 @@ public class CollectionDay {
 		return false;
 	}
 	
-	// 与えられた月(年と月)の回収日リスト
+	@Override
 	public List<LocalDate> getCollectingDaysOfMonth(YearMonth yearMonth) {
 		LocalDate date = yearMonth.atDay(1);
 		return collectingWeek.stream()
 			.map(weekNum -> date.with(TemporalAdjusters.dayOfWeekInMonth(weekNum, dayOfWeek)))
 			.collect(Collectors.toList());
 	}
+
 }
-
-
-
-
-
-
